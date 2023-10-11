@@ -33,7 +33,7 @@ public class PuntoBancoGame {
 				playerTotal += calculateCardValue(playerCard3);
 			}
 	
-			// Banker draws a card based on complex rules...
+			// Banker draws a card 
 			if (shouldBankerDraw(bankerTotal, playerTotal)) {
 				Card bankerCard3 = deck.getDeck().remove(0);
 				bankerTotal += calculateCardValue(bankerCard3);

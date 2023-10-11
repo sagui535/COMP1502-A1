@@ -58,18 +58,18 @@ public class PuntoBancoGame {
 	
 		private boolean shouldBankerDraw(int bankerTotal, int playerTotal) {
 			// Banker draws a card 
-			if (playerTotal == 2 || playerTotal == 3) {
-				return bankerTotal <= 4;
-			} else if (playerTotal == 4 || playerTotal == 5) {
-				return bankerTotal <= 5;
-			} else if (playerTotal == 6 || playerTotal == 7) {
-				return bankerTotal <= 6;
-			} else if (playerTotal == 8) {
-				return bankerTotal <= 2;
-			} else if (playerTotal == 1 || playerTotal >= 9) {
-				return bankerTotal <= 3;
-			} else { // playerTotal is 0
-				return bankerTotal <= 5;
+			if (bankerTotal <= 2) {
+				return true;
+			} else if (bankerTotal == 3) {
+				return playerTotal != 8;
+			} else if (bankerTotal == 4) {
+				return playerTotal >= 2 && playerTotal <= 7;
+			} else if (bankerTotal == 5) {
+				return playerTotal >= 4 && playerTotal <= 7;
+			} else if (bankerTotal == 6) {
+				return playerTotal == 6 || playerTotal == 7;
+			} else {
+				return false;
 			}
 		}
 		

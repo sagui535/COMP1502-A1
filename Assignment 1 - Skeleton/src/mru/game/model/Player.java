@@ -40,8 +40,9 @@ public class Player {
 		return numOfWins;
 	}
 	public String toString() {
-		return "Name: " + name + " Balance: " + balance + " Number of Wins: " + numOfWins;
+		return "";
 	}
+	
 	public String format() {
 		return name+","+balance+","+numOfWins;
 	}

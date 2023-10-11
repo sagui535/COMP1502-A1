@@ -22,10 +22,12 @@ public class GameManager {
 	private final String FILE_PATH = "res/CasinoInfo.txt";
 	ArrayList<Player> players;
 	AppMenu appMen;
+	private Scanner enter;
 	
 	public GameManager() throws Exception {
 		players = new ArrayList<>();
 		appMen = new AppMenu();
+		enter = new Scanner(System.in);
 		loadData();
 		
 		launchApp();
@@ -72,6 +74,7 @@ public class GameManager {
 			appMen.showPlayer(ply);
 			break;
 		case 'b':
+			appMen.showMainMenu();
 			break;
 			
 		}
@@ -80,15 +83,35 @@ public class GameManager {
 	}
 
 	private Player searchByName() {
-		String name = appMen.promtName();
+		String name = appMen.promtName().toLowerCase();
 		Player ply = null;
 		
 		for (Player p: players) {
-			if (p.getName().equals(name)) {
+			if (p.getName().toLowerCase().equals(name)) {
 				ply = p;
 				break;
 			}
 		}
+		
+		//not from video
+		if (ply != null) {
+	        System.out.println("   		    -PLAYER INFO-");
+	        System.out.println("+==================+==================+==================+");
+	        System.out.println("|NAME              |# WINS            |BALANCE           |");
+	        System.out.println("+==================+==================+==================+");
+	        System.out.println("|" + formatString(ply.getName(), 18) + "|" +
+	                formatString(String.valueOf(ply.getNumOfWins()), 18) + "|" +
+	                formatString(String.valueOf(ply.getBalance()), 18) + "|");
+	        System.out.println("+==================+==================+==================+");
+	  
+	        System.out.println("Press \"Enter\" to continue...");
+		    enter.nextLine();
+		    appMen.showMainMenu();
+		
+		} else {
+	        System.out.println("Player does not exist. Try again!");
+	    }
+		//end
 		
 		return ply;
 		
@@ -114,7 +137,7 @@ public class GameManager {
 			}
 		}
 		
-		System.out.println("	   -TOP PLAYERS-");
+		System.out.println("	     -TOP PLAYERS-");
 	    System.out.println("+==================+==================+");
 	    System.out.println("|NAME              |# WINS            |");
 	    System.out.println("+==================+==================+");
@@ -124,6 +147,12 @@ public class GameManager {
 	    	formatString(String.valueOf(topPlayer.getNumOfWins()), 18) + "|");
 	        System.out.println("+==================+==================+");
 	    }
+	    
+	    System.out.println("Press \"Enter\" to continue...");
+	    enter.nextLine();
+	    appMen.showMainMenu();
+	    
+	    
 	}
 	//added method to format string to specific length
 	private String formatString(String input, int length) {
@@ -144,6 +173,9 @@ public class GameManager {
 	
 
 	private void Save() throws IOException {
+		System.out.println("Saving...");
+		System.out.println("Done! Please visit us again!");
+		
 		File db = new File(FILE_PATH);
 		PrintWriter pw = new PrintWriter(db);
 		
@@ -172,10 +204,3 @@ public class GameManager {
 		
 	}
 }
-	
-	
-	
-	
-	
-	//end
-	

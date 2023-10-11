@@ -49,6 +49,3 @@ public class AppMenu {
 		System.out.println(ply);
 	}
 }
-	
-	//end
-	

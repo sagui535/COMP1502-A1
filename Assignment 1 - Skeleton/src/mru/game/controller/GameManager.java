@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList; //added
 import java.util.Scanner;	//added
-
 import mru.game.model.Player;	//added
 import mru.game.view.AppMenu;
 
@@ -29,15 +28,15 @@ public class GameManager {
 		appMen = new AppMenu();
 		enter = new Scanner(System.in);
 		loadData();
-		
 		launchApp();
 	}
-	
+
 	private void launchApp() throws Exception {
 		boolean flag = true;
-		char option = appMen.showMainMenu();
 		
 		while (flag) {
+			char option = appMen.showMainMenu();
+			
 			switch (option) {
 			case 'p':
 				playGame();
@@ -46,10 +45,10 @@ public class GameManager {
 				Search();
 				break;
 			case 'e':
-				Save();
 				flag = false;
+				Save();
+				break;
 			}
-			
 		}
 	}
 		
@@ -79,23 +78,20 @@ public class GameManager {
 	
 
 	private void Search() {
-		char option = appMen.showSubMenu();
-		
-		switch (option) {
-		case 't':
-			FindTopPlayer();
-			break;
-		case 'n':
-			Player ply = searchByName();
-			appMen.showPlayer(ply);
-			break;
-		case 'b':
-			appMen.showMainMenu();
-			break;
-			
-		}
-		
-		
+	    char option;
+	    do {
+	        option = appMen.showSubMenu();
+
+	        switch (option) {
+	            case 't':
+	                FindTopPlayer();
+	                break;
+	            case 'n':
+	                Player ply = searchByName();
+	                appMen.showPlayer(ply);
+	                break;
+	        }
+	    } while (option != 'b');
 	}
 
 	private Player searchByName() {

@@ -74,7 +74,7 @@ public class PuntoBancoGame {
 		}
 		
 		private void checkWin(Player player, int playerTotal, int bankerTotal, String betChoice, double betAmount) {
-			// "player" "banker" and "tie" need to be replaced with the actual user input value
+		
 			String winner;
 			if (playerTotal > bankerTotal) {
 				winner = "player";

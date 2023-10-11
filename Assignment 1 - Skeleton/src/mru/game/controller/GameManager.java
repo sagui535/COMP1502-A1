@@ -55,7 +55,23 @@ public class GameManager {
 		
 		
 	private void playGame() {
-		// TODO Auto-generated method stub
+		
+		Player currentPlayer = searchByName(); 
+
+		// Get the player's bet and amount
+		String betChoice = appMen.promptBetChoice();
+		double betAmount = appMen.promptBetAmount();
+	
+		// Ensure the player has enough balance
+		if (currentPlayer.getBalance() < betAmount) {
+			System.out.println("You do not have enough balance to make this bet.");
+			return;
+		}
+	
+		// Play Punto Banco game
+		PuntoBancoGame game = new PuntoBancoGame();
+		game.play(currentPlayer, betChoice, betAmount);
+	}
 		
 	}
 

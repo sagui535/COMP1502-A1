@@ -8,8 +8,7 @@ import mru.game.model.Player;	//added
 import mru.game.view.AppMenu;
 
 
-public class GameManager {
-	
+public class GameManager {	
 	/* In this class toy'll need these methods:
 	 * A constructor
 	 * A method to load the txt file into an arraylist (if it exists, so you check if the txt file exists first)
@@ -30,7 +29,7 @@ public class GameManager {
 		loadData();
 		launchApp();
 	}
-
+	
 	private void launchApp() throws Exception {
 		boolean flag = true;
 		
@@ -48,12 +47,13 @@ public class GameManager {
 				flag = false;
 				Save();
 				break;
+			default:
+				System.out.println("Invalid choice. Try again!");
 			}
 		}
 	}
-		
-		
-	private void playGame() {
+
+		private void playGame() {
 		
 		Player currentPlayer = searchByName(); 
 
@@ -71,16 +71,10 @@ public class GameManager {
 		PuntoBancoGame game = new PuntoBancoGame();
 		game.play(currentPlayer, betChoice, betAmount);
 	}
-		
-	}
-
 
 	
-
 	private void Search() {
-	    char option;
-	    do {
-	        option = appMen.showSubMenu();
+	        char option = appMen.showSubMenu();
 
 	        switch (option) {
 	            case 't':
@@ -90,9 +84,14 @@ public class GameManager {
 	                Player ply = searchByName();
 	                appMen.showPlayer(ply);
 	                break;
+	            case 'b':
+	            	break;
+	            default:
+					System.out.println("Invalid choice. Try again!");
+					Search();
 	        }
-	    } while (option != 'b');
 	}
+	
 
 	private Player searchByName() {
 		String name = appMen.promtName().toLowerCase();
@@ -104,8 +103,6 @@ public class GameManager {
 				break;
 			}
 		}
-		
-		//not from video
 		if (ply != null) {
 	        System.out.println("   		    -PLAYER INFO-");
 	        System.out.println("+==================+==================+==================+");
@@ -118,17 +115,15 @@ public class GameManager {
 	  
 	        System.out.println("Press \"Enter\" to continue...");
 		    enter.nextLine();
-		    appMen.showMainMenu();
+		    
 		
 		} else {
 	        System.out.println("Player does not exist. Try again!");
 	    }
-		//end
-		
 		return ply;
-		
 	}
 
+	
 	private void FindTopPlayer() {
 		// not from video
 		if(players.isEmpty()) {
@@ -161,10 +156,7 @@ public class GameManager {
 	    }
 	    
 	    System.out.println("Press \"Enter\" to continue...");
-	    enter.nextLine();
-	    appMen.showMainMenu();
-	    
-	    
+	    enter.nextLine();  
 	}
 	//added method to format string to specific length
 	private String formatString(String input, int length) {
@@ -180,13 +172,8 @@ public class GameManager {
 	}
 	
 	        
-	
-		
-	
-
 	private void Save() throws IOException {
 		System.out.println("Saving...");
-		System.out.println("Done! Please visit us again!");
 		
 		File db = new File(FILE_PATH);
 		PrintWriter pw = new PrintWriter(db);
@@ -195,6 +182,7 @@ public class GameManager {
 			pw.println(p.format());
 		}
 		pw.close();
+		System.out.println("Done! Please visit us again!");
 	}
 
 	private void loadData() throws Exception {
@@ -216,3 +204,4 @@ public class GameManager {
 		
 	}
 }
+

@@ -48,4 +48,15 @@ public class AppMenu {
 	public void showPlayer(Player ply) {
 		System.out.println(ply);
 	}
+	public String promptBetChoice() {
+		System.out.println("How much would you like to bet this round: ");
+		String betChoice = input.nextLine();
+        return betChoice;
+		
+	}
+	public double promptBetAmount() {
+		System.out.println("Please enter your bet amount:");
+        double betAmount = input.nextDouble();
+        return betAmount;
+	}
 }
